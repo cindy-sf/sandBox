@@ -5,6 +5,8 @@ const sass = require('gulp-sass');
 const browserSync = require('browser-sync').create();
 const nodemon = require('gulp-nodemon');
 const cleanCSS = require('gulp-clean-css');
+const uglify = require('gulp-uglify');
+const pump = require('pump');
 
 //Compile les fichiers PUG en HTML
 gulp.task('pug', function () {
@@ -22,8 +24,19 @@ gulp.task('sass', function () {
         .pipe(browserSync.stream());
 });
 
+// Minify le Js
+gulp.task('compress', function (cb) {
+    pump([
+          gulp.src('src/static/js/main.js'),
+          uglify(),
+          gulp.dest('dist/js')
+      ],
+      cb
+    );
+  });
+
 //Browser-Sync / Nodemon
-gulp.task('browser-sync', ['nodemon', 'pug', 'sass'], function(){
+gulp.task('browser-sync', ['nodemon', 'pug', 'sass', 'compress'], function(){
     browserSync.init(null, {
         proxy: "http://localhost:2000",
         files: ["dist/**/*.*"],
@@ -31,6 +44,7 @@ gulp.task('browser-sync', ['nodemon', 'pug', 'sass'], function(){
     }),
     gulp.watch('src/static/sass/*.scss', ['sass']);
     gulp.watch('src/static/pug/*.pug', ['pug']);
+    gulp.watch('src/static/js/*.js', ['compress']);
     gulp.watch('dist/*.html').on('change', browserSync.reload);
     gulp.watch('dist/css/*.css').on('change', browserSync.reload);
     gulp.watch('dist/js/*.js').on('change', browserSync.reload);
