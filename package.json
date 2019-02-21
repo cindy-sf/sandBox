@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -16,8 +17,13 @@
     "url": "https://github.com/cindy-sf/sandbox/issues"
   },
   "homepage": "https://github.com/cindy-sf/sandbox#readme",
-  "devDependencies": {},
-  "dependencies": {
-    "webpack": "^4.29.5"
-  }
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.0"
+  },
+  "dependencies": {}
 }
