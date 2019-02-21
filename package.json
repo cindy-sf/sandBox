@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cindy-sf/sandbox/issues"
   },
-  "homepage": "https://github.com/cindy-sf/sandbox#readme"
+  "homepage": "https://github.com/cindy-sf/sandbox#readme",
+  "dependencies": {
+    "parcel": "^1.11.0"
+  }
 }
